@@ -9,7 +9,9 @@ var numeroMax;
 
 livello = parseInt(prompt("Inserisci il livello di difficoltà: 0, 1 oppure 2"));
 console.log(livello);
+livelli();
 
+function livelli(){
 switch (livello) {
   case 0:
     numeroMax = 100;
@@ -26,8 +28,28 @@ switch (livello) {
   default:
     while (livello != 0 && livello != 1 && livello != 2 ) {
     livello = parseInt(prompt("Per favore inserisci il livello corretto di difficoltà: 0, 1 oppure 2"));
+    livelli();
     }
 }
+}
+
+// // SOLUZIONE CON IF
+// function livelli() {
+//   if (livello == 0) {
+//     numeroMax = 100;
+//     possibilita = 84;
+//   } else if (livello == 1) {
+//     numeroMax = 80;
+//     possibilita = 64;
+//   } else if (livello == 2) {
+//     numeroMax = 50;
+//     possibilita = 34;
+//   } else {
+//     livello = parseInt(prompt("Per favore inserisci il livello corretto di difficoltà: 0, 1 oppure 2"));
+//     livelli();
+//   }
+//
+// }
 
 // genero funzione numero random
 function generaNumeriRandom(min, max) {
