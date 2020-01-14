@@ -4,6 +4,30 @@ var punteggio = 0;
 var possibilita = 84;
 var numeroUtente;
 var trovato = false;
+var livello;
+var difficolta;
+var numeroMax;
+
+difficolta = prompt("Inserisci il livello di difficoltà: 0, 1 oppure 2");
+
+switch (difficolta) {
+  case "0":
+    numeroMax = 100;
+    possibilita = 84;
+    break;
+  case "1":
+    numeroMax = 80;
+    possibilita = 64;
+    break;
+  case "2":
+    numeroMax = 50;
+    possibilita = 34;
+    break;
+  default:
+    while (difficolta > 2) {
+      difficolta = prompt("Per favore inserisci il livello corretto di difficoltà: 0, 1 oppure 2");
+    }
+}
 
 // genero funzione numero random
 function generaNumeriRandom(min, max) {
@@ -12,7 +36,8 @@ function generaNumeriRandom(min, max) {
 
 // genero numeri random
 for (var i = 0; i < 16; i++) {
-  numeriRandom.push(generaNumeriRandom(1, 100));
+
+  numeriRandom.push(generaNumeriRandom(1, numeroMax));
 }
 console.log("numeri random " + numeriRandom);
 document.getElementById("numeri-random").innerHTML = numeriRandom;
@@ -20,8 +45,17 @@ document.getElementById("numeri-random").innerHTML = numeriRandom;
 // l'utente inserisce un numero per 84 tentativi
 var x = 0;
 while (x < possibilita && trovato == false) {
-  numeroUtente = prompt('Inserisci un numero da 1 a 100')
-  console.log('Numero inserito: ' + numeroUtente);
+  if (difficolta == "0") {
+    numeroUtente = prompt('Inserisci un numero da 1 a 100')
+    console.log('Numero inserito: ' + numeroUtente);
+  } else if (difficolta == "1") {
+    numeroUtente = prompt('Inserisci un numero da 1 a 80')
+    console.log('Numero inserito: ' + numeroUtente);
+  } else if (difficolta == "2") {
+    numeroUtente = prompt('Inserisci un numero da 1 a 50')
+    console.log('Numero inserito: ' + numeroUtente);
+  }
+
   for (var t = 0; t < numeriRandom.length; t++) {
     if (numeroUtente == numeriRandom[t]) {
       trovato = true;
@@ -38,23 +72,3 @@ while (x < possibilita && trovato == false) {
 }
 
 console.log(" è stato trovato? " + trovato);
-
-// CON UN PROMPT
-// var numeroUtente = parseInt(prompt("inserisci un numero da 1 a 100"));
-//
-// numeriUtente.push(numeroUtente);
-// console.log("numeriUtente " + numeriUtente);
-// tentativi = numeriUtente.length;
-// console.log("numero tentativi primo prompt " + tentativi)
-//
-// var trovato = false;
-// for (var i = 0; i < 16; i++) {
-//   numeriRandom.push(generaNumeriRandom(1, 100));
-//   if (numeroUtente == numeriRandom[i]) {
-//     trovato = true;
-//   }
-// }
-//
-// if (trovato == true) {
-//   console.log("partita finita");
-// }
