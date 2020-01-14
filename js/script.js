@@ -1,7 +1,7 @@
 var numeriRandom = [];
 var numeriUtente = [];
 var punteggio = 0;
-var possibilita = 10;
+var possibilita = 84;
 var numeroUtente;
 var trovato = false;
 
@@ -12,7 +12,7 @@ function generaNumeriRandom(min, max) {
 
 // genero numeri random
 for (var i = 0; i < 16; i++) {
-  numeriRandom.push(generaNumeriRandom(1, 10));
+  numeriRandom.push(generaNumeriRandom(1, 100));
 }
 console.log("numeri random " + numeriRandom);
 
