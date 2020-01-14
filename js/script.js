@@ -15,6 +15,7 @@ for (var i = 0; i < 16; i++) {
   numeriRandom.push(generaNumeriRandom(1, 100));
 }
 console.log("numeri random " + numeriRandom);
+document.getElementById("numeri-random").innerHTML = numeriRandom;
 
 // l'utente inserisce un numero per 84 tentativi
 
@@ -29,11 +30,13 @@ while (x < possibilita && trovato == false) {
     }
     if (trovato == true) {
       console.log("partita finita");
+      document.getElementById("messaggio").innerHTML = "Partita finita. Hai beccato il numero nascosto";
     }
   }
   x++;
   punteggio++;
   console.log("punteggio" + punteggio);
+  document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio;
 }
 
 console.log(" è stato trovato? " + trovato);
