@@ -22,11 +22,23 @@ document.getElementById("numeri-random").innerHTML = numeriRandom;
 
 while (numeriUtente.length < possibilita && trovato == false) {
   // chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
-  do {
-    numeroUtente = parseInt(prompt("Inserisci un numero da 1 a 100"));
-    console.log('Numero inserito: ' + numeroUtente);
+
+  numeroUtente = parseInt(prompt(titoloDomanda));
+  richiedi();
+
+  function richiedi() {
+    while (controlloRangeNumeri(1, 100, numeroUtente) == false) {
+      numeroUtente = parseInt(prompt("Per favore inserisci un numero corretto: da 0  a 100" ));
+      console.log('Numero inserito: ' + numeroUtente);
+      richiedi();
+    }
   }
-  while (controlloRangeNumeri(1, 100, numeroUtente) == false)
+
+  // do {
+  //   numeroUtente = parseInt(prompt("Inserisci un numero da 1 a 100"));
+  //   console.log('Numero inserito: ' + numeroUtente);
+  // }
+  // while (controlloRangeNumeri(1, 100, numeroUtente) == false)
 
 
   if (presenteInArray(numeriUtente, numeroUtente) == false) {
