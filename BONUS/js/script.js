@@ -55,15 +55,9 @@ while (numeriUtente.length < possibilita && trovato == false) {
   // chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
 
   numeroUtente = parseInt(prompt(titoloDomanda));
-  richiedi();
+  richiediNumeroCorretto();
 
-  function richiedi() {
-    while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false) {
-      numeroUtente = parseInt(prompt("Per favore inserisci un numero corretto: da 0  a " + numeroMax));
-      console.log('Numero inserito: ' + numeroUtente);
-      richiedi();
-    }
-  }
+
 
   // do {
   //   numeroUtente = parseInt(prompt(titoloDomanda));
@@ -119,4 +113,11 @@ function presenteInArray(array, element) {
     i++;
   }
   return result;
+}
+// richiedi numero corretto
+function richiediNumeroCorretto() {
+  while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false) {
+    numeroUtente = parseInt(prompt("Per favore inserisci un numero corretto: da 0  a " + numeroMax));
+    console.log('Numero inserito: ' + numeroUtente);
+  }
 }
