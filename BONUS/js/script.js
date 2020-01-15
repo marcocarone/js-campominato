@@ -10,10 +10,10 @@ var numeroMin;
 
 
 // chiedo livello difficoltà
-do {
-  livello = parseInt(prompt("Inserisci il livello di difficoltà: 0, 1 oppure 2"));
-  console.log(livello);
-} while (livello != 0 && livello != 1 && livello != 2);
+livello = parseInt(prompt("Inserisci il livello di difficoltà: 0, 1 oppure 2"));
+while (livello != 0 && livello != 1 && livello != 2){
+  livello = parseInt(prompt("Per favore inserisci il livello corretto di difficoltà: 0, 1 oppure 2"));
+}
 
 switch (livello) {
   case 0:
@@ -56,19 +56,11 @@ while (numeriUtente.length < possibilita && trovato == false) {
 
   numeroUtente = parseInt(prompt(titoloDomanda));
   richiediNumeroCorretto();
-
-
-
-  // do {
-  //   numeroUtente = parseInt(prompt(titoloDomanda));
-  //   console.log('Numero inserito: ' + numeroUtente);
-  // }
-  // while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false)
-
+  numUgualeInserito()
 
   if (presenteInArray(numeriUtente, numeroUtente) == false) {
     numeriUtente.push(numeroUtente);
-    // se il numero dell'utente è presente nelle numberBomb hai perso
+    // se il numero dell'utente è presente
     if (presenteInArray(numeriRandom, numeroUtente) == true) {
       console.log("partita finita");
       document.getElementById("messaggio").innerHTML = "Partita finita. Hai beccato il numero nascosto";
@@ -78,6 +70,8 @@ while (numeriUtente.length < possibilita && trovato == false) {
     }
   }
 }
+
+
 
 console.log(" è stato trovato? " + trovato);
 console.log("punteggio" + punteggio);
@@ -117,7 +111,13 @@ function presenteInArray(array, element) {
 // richiedi numero corretto
 function richiediNumeroCorretto() {
   while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false) {
-    numeroUtente = parseInt(prompt("Per favore inserisci un numero corretto: da 0  a " + numeroMax));
+    numeroUtente = parseInt(prompt("Per favore inserisci un numero corretto: da 1  a " + numeroMax));
     console.log('Numero inserito: ' + numeroUtente);
+  }
+}
+
+function numUgualeInserito() {
+  while (presenteInArray(numeriUtente, numeroUtente) == true) {
+numeroUtente = parseInt(prompt ("Avevi già inserito questo numero. Riprova con un numero diverso da " + numeroMin + " a " + numeroMax));
   }
 }
