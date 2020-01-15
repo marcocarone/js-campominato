@@ -50,8 +50,8 @@ console.log("numeri random " + numeriRandom);
 document.getElementById("numeri-random").innerHTML = numeriRandom;
 
 
-var x = 0;
-while (x < possibilita && trovato == false) {
+
+while (numeriUtente.length < possibilita && trovato == false) {
   // chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
   do {
     numeroUtente = parseInt(prompt(titoloDomanda));
@@ -71,12 +71,15 @@ while (x < possibilita && trovato == false) {
       punteggio++;
     }
   }
-  x++;
 }
 
 console.log(" è stato trovato? " + trovato);
 console.log("punteggio" + punteggio);
 document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio;
+
+if (numeriUtente.length == possibilita) {
+  document.getElementById("messaggio").innerHTML = "Hai vinto la PARTITA senza lasciarci le penne!";
+}
 
 // FUNZIONI DELLO SCRIPT
 // genero funzione numero random

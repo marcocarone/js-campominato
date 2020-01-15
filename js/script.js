@@ -1,60 +1,78 @@
 var numeriRandom = [];
 var numeriUtente = [];
 var punteggio = 0;
-var possibilita = 84;
+var possibilita = 3;
 var numeroUtente;
 var trovato = false;
 
-// genero funzione numero random
-function generaNumeriRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 // genero numeri random
-for (var i = 0; i < 16; i++) {
-  numeriRandom.push(generaNumeriRandom(1, 100));
+while (numeriRandom.length < 16) {
+  //inserisco solo se il numero non è già presente nell'array
+  var numeroCasuale = generaNumeriRandom(1, 100);
+  var cerca = presenteInArray(numeriRandom, numeroCasuale);
+  if (cerca == false) {
+    numeriRandom.push(numeroCasuale);
+  }
 }
 console.log("numeri random " + numeriRandom);
 document.getElementById("numeri-random").innerHTML = numeriRandom;
 
 // l'utente inserisce un numero per 84 tentativi
-var x = 0;
-while (x < possibilita && trovato == false) {
-  numeroUtente = prompt('Inserisci un numero da 1 a 100')
-  console.log('Numero inserito: ' + numeroUtente);
-  for (var t = 0; t < numeriRandom.length; t++) {
-    if (numeroUtente == numeriRandom[t]) {
-      trovato = true;
-    }
-    if (trovato == true) {
+
+
+while (numeriUtente.length < possibilita && trovato == false) {
+  // chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
+  do {
+    numeroUtente = parseInt(prompt("Inserisci un numero da 1 a 100"));
+    console.log('Numero inserito: ' + numeroUtente);
+  }
+  while (controlloRangeNumeri(1, 100, numeroUtente) == false)
+
+
+  if (presenteInArray(numeriUtente, numeroUtente) == false) {
+    numeriUtente.push(numeroUtente);
+    // se il numero dell'utente è presente nelle numberBomb hai perso
+    if (presenteInArray(numeriRandom, numeroUtente) == true) {
       console.log("partita finita");
       document.getElementById("messaggio").innerHTML = "Partita finita. Hai beccato il numero nascosto";
+      trovato = true;
+    } else {
+      punteggio++;
     }
   }
-  x++;
-  punteggio++;
-  console.log("punteggio" + punteggio);
-  document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio;
+}
+console.log(" è stato trovato? " + trovato);
+console.log("punteggio" + punteggio);
+document.getElementById("punteggio").innerHTML = "Hai totalizzato un punteggio di " + punteggio;
+
+if (numeriUtente.length == possibilita) {
+  document.getElementById("messaggio").innerHTML = "Hai vinto la PARTITA senza lasciarci le penne!";
 }
 
-console.log(" è stato trovato? " + trovato);
+// FUNZIONI DELLO SCRIPT
+// genero funzione numero random
+function generaNumeriRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-// CON UN PROMPT
-// var numeroUtente = parseInt(prompt("inserisci un numero da 1 a 100"));
-//
-// numeriUtente.push(numeroUtente);
-// console.log("numeriUtente " + numeriUtente);
-// tentativi = numeriUtente.length;
-// console.log("numero tentativi primo prompt " + tentativi)
-//
-// var trovato = false;
-// for (var i = 0; i < 16; i++) {
-//   numeriRandom.push(generaNumeriRandom(1, 100));
-//   if (numeroUtente == numeriRandom[i]) {
-//     trovato = true;
-//   }
-// }
-//
-// if (trovato == true) {
-//   console.log("partita finita");
-// }
+//funzione che controlla che un numero sia in un certo range
+function controlloRangeNumeri(min, max, number) {
+  var result = false;
+  if (number >= min && number <= max) {
+    result = true;
+  }
+  return result;
+}
+
+// funzione che cerca in un array
+function presenteInArray(array, element) {
+  var i = 0;
+  var result = false;
+  while (i < array.length && result == false) {
+    if (array[i] == element) {
+      result = true;
+    }
+    i++;
+  }
+  return result;
+}
