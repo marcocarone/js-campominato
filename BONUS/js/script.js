@@ -53,11 +53,23 @@ document.getElementById("numeri-random").innerHTML = numeriRandom;
 
 while (numeriUtente.length < possibilita && trovato == false) {
   // chiedo un numero all'utente con un ciclo per verificare che i numeri rispettino il range
-  do {
-    numeroUtente = parseInt(prompt(titoloDomanda));
-    console.log('Numero inserito: ' + numeroUtente);
+
+  numeroUtente = parseInt(prompt(titoloDomanda));
+  richiedi();
+
+  function richiedi() {
+    while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false) {
+      numeroUtente = parseInt(prompt("Per favore inserisci un numero corretto: da 0  a " + numeroMax));
+      console.log('Numero inserito: ' + numeroUtente);
+      richiedi();
+    }
   }
-  while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false)
+
+  // do {
+  //   numeroUtente = parseInt(prompt(titoloDomanda));
+  //   console.log('Numero inserito: ' + numeroUtente);
+  // }
+  // while (controlloRangeNumeri(numeroMin, numeroMax, numeroUtente) == false)
 
 
   if (presenteInArray(numeriUtente, numeroUtente) == false) {
